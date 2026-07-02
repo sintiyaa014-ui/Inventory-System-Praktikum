@@ -1,15 +1,14 @@
 package entity;
 
-public class Barang {
+public class 
+Barang extends BaseEntity {
+    // 1. Tambahkan kembali atribut yang diperlukan
     private String kodeBarang;
     private String namaBarang;
     private int stok;
     private double harga;
 
-    // Constructor kosong
-    public Barang() {}
-
-    // Constructor dengan parameter
+    // 2. Tambahkan Constructor yang sesuai dengan panggilan di Controller
     public Barang(String kodeBarang, String namaBarang, int stok, double harga) {
         this.kodeBarang = kodeBarang;
         this.namaBarang = namaBarang;
@@ -17,16 +16,15 @@ public class Barang {
         this.harga = harga;
     }
 
-    // Getter dan Setter (Wajib untuk akses atribut private)
+    // 3. Tambahkan Getter agar error "is undefined" hilang
     public String getKodeBarang() { return kodeBarang; }
-    public void setKodeBarang(String kodeBarang) { this.kodeBarang = kodeBarang; }
-
     public String getNamaBarang() { return namaBarang; }
-    public void setNamaBarang(String namaBarang) { this.namaBarang = namaBarang; }
-
     public int getStok() { return stok; }
-    public void setStok(int stok) { this.stok = stok; }
-
     public double getHarga() { return harga; }
-    public void setHarga(double harga) { this.harga = harga; }
+
+    // Implementasi abstract method dari BaseEntity
+    @Override
+    public String getInfo() {
+        return "Barang: " + this.namaBarang;
+    }
 }
