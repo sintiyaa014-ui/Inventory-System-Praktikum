@@ -6,18 +6,19 @@ import view.BarangView;
 
 public class BarangController {
     private BarangView view;
-    private BarangService service = new BarangService(); // Pastikan inisialisasi ini ada
+    private BarangService service = new BarangService();
 
     public BarangController(BarangView view) {
         this.view = view;
     }
 
     public void tambahBarang(String kode, String nama, int stok, double harga) {
-        if (service != null) {
+        try {
             Barang barang = new Barang(kode, nama, stok, harga);
             service.tambahBarang(barang);
-        } else {
-            System.err.println("Error: Service tidak terhubung!");
+            view.showMessage("Data berhasil disimpan!");
+        } catch (Exception e) {
+            view.showMessage("Error: " + e.getMessage());
         }
     }
 }
