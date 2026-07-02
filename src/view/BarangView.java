@@ -1,4 +1,5 @@
 package view;
+
 import controller.BarangController;
 import javax.swing.*;
 import java.awt.*;
@@ -10,17 +11,45 @@ public class BarangView extends JFrame {
     private JButton btnSimpan = new JButton("Simpan");
 
     public BarangView() {
+        setTitle("Inventory Barang");
         setLayout(new FlowLayout());
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         add(new JLabel("Kode:")); add(txtKode);
         add(new JLabel("Nama:")); add(txtNama);
         add(btnSimpan);
 
+        // Aksi tombol simpan dengan pesan debug
         btnSimpan.addActionListener(e -> {
-            controller.tambahBarang(txtKode.getText(), txtNama.getText(), 0, 0.0);
+    System.out.println("Tombol Simpan telah diklik!"); // TANDA 1
+    String kode = txtKode.getText();
+    String nama = txtNama.getText();
+    
+    // ... sisa kode ...
+            
+            // Validasi input
+            if (kode.isEmpty() || nama.isEmpty()) {
+                showMessage("Error: Kode dan Nama harus diisi!");
+                return;
+            }
+
+            // Panggil Controller
+            controller.tambahBarang(kode, nama, 0, 0.0);
+            
+            // Reset field
+            txtKode.setText("");
+            txtNama.setText("");
+            
+            // Feedback
+            showMessage("Data barang berhasil disimpan!");
         });
-        pack(); setVisible(true);
+
+        pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
 
-    public void showMessage(String msg) { JOptionPane.showMessageDialog(this, msg); }
-    public void refreshTable() { /* Logic refresh */ }
+    public void showMessage(String msg) { 
+        JOptionPane.showMessageDialog(this, msg); 
+    }
 }
