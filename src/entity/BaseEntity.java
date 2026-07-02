@@ -1,5 +1,14 @@
 package entity;
+
 public abstract class BaseEntity {
-    // Polimorphism: method yang wajib ada di setiap child
-    public abstract String getInfo();
+    // Semua entity pasti butuh ID atau timestamp
+    protected String id; 
+
+    public BaseEntity(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
 }
